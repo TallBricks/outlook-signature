@@ -1,99 +1,179 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <OfficeApp
-    xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
-    xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides/1.0"
-    xsi:type="MailApp">
+  xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
+  xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides/1.0"
+  xsi:type="MailApp">
 
-    <Id>61393f9c-6746-4eb1-b060-808ebc6b442f</Id>
-    <Version>1.0.0.0</Version>
-    <ProviderName>Tall Bricks Real Estate LLC</ProviderName>
-    <DefaultLocale>en-US</DefaultLocale>
-    <DisplayName DefaultValue="Tall Bricks Email Signature"/>
-    <Description DefaultValue="Automatically inserts the Tall Bricks email signature in Outlook compose window"/>
+  <Id>61393f9c-6746-4eb1-b060-808ebc6b442f</Id>
+  <Version>1.0.0.0</Version>
+  <ProviderName>Tall Bricks Real Estate LLC</ProviderName>
+  <DefaultLocale>en-US</DefaultLocale>
+  <DisplayName DefaultValue="Tall Bricks Signature"/>
+  <Description DefaultValue="Inserts Tall Bricks email signature"/>
+  <IconUrl DefaultValue="https://www.tallbricks.com/wp-content/uploads/tb-square-logo-1200x1200-1-scaled.png"/>
+  <HighResolutionIconUrl DefaultValue="https://www.tallbricks.com/wp-content/uploads/tb-square-logo-1200x1200-1-scaled.png"/>
+  <SupportUrl DefaultValue="https://www.tallbricks.com"/>
 
-    <IconUrl DefaultValue="https://www.tallbricks.com/wp-content/uploads/tb-square-logo-1200x1200-1-scaled.png"/>
-    <HighResolutionIconUrl DefaultValue="https://www.tallbricks.com/wp-content/uploads/tb-square-logo-1200x1200-1-scaled.png"/>
-    <SupportUrl DefaultValue="https://www.tallbricks.com"/>
+  <AppDomains>
+    <AppDomain>https://tallbricks.github.io</AppDomain>
+    <AppDomain>https://graph.microsoft.com</AppDomain>
+    <AppDomain>https://login.microsoftonline.com</AppDomain>
+  </AppDomains>
 
-    <AppDomains>
-        <AppDomain>https://graph.microsoft.com</AppDomain>
-        <AppDomain>https://login.microsoftonline.com</AppDomain>
-    </AppDomains>
+  <Hosts>
+    <Host Name="Mailbox"/>
+  </Hosts>
 
-    <Hosts>
-        <Host Name="Mailbox"/>
-    </Hosts>
+  <Requirements>
+    <Sets>
+      <Set Name="Mailbox" MinVersion="1.1"/>
+    </Sets>
+  </Requirements>
+
+  <FormSettings>
+    <Form xsi:type="ItemEdit">
+      <DesktopSettings>
+        <SourceLocation DefaultValue="https://tallbricks.github.io/outlook-signature/index.html"/>
+      </DesktopSettings>
+    </Form>
+  </FormSettings>
+
+  <Permissions>ReadWriteItem</Permissions>
+
+  <Rule xsi:type="RuleCollection" Mode="Or">
+    <Rule xsi:type="ItemIs" ItemType="Message" FormType="Edit"/>
+  </Rule>
+
+  <DisableEntityHighlighting>false</DisableEntityHighlighting>
+
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides" xsi:type="VersionOverridesV1_0">
 
     <Requirements>
-        <Sets>
-            <Set Name="Mailbox" MinVersion="1.10"/>
-        </Sets>
+      <bt:Sets DefaultMinVersion="1.3">
+        <bt:Set Name="Mailbox"/>
+      </bt:Sets>
     </Requirements>
 
-    <FormSettings>
-        <Form xsi:type="ItemEdit">
-            <DesktopSettings>
-                <SourceLocation DefaultValue="https://tallbricks.github.io/outlook-signature/index.html"/>
-                <RequestedHeight>50</RequestedHeight>
-            </DesktopSettings>
-        </Form>
-    </FormSettings>
+    <Hosts>
+      <Host xsi:type="MailHost">
+        <DesktopFormFactor>
+          <FunctionFile resid="FunctionFile.Url"/>
 
-    <Permissions>ReadWriteItem</Permissions>
-    <Rule xsi:type="RuleCollection" Mode="Or">
-        <Rule xsi:type="ItemIs" ItemType="Message" FormType="Edit"/>
-    </Rule>
-    <DisableEntityHighlighting>false</DisableEntityHighlighting>
+          <ExtensionPoint xsi:type="MessageComposeCommandSurface">
+            <OfficeTab id="TabDefault">
+              <Group id="msgComposeGroup">
+                <Label resid="GroupLabel"/>
+                <Control xsi:type="Button" id="msgComposeInsertSignature">
+                  <Label resid="TaskpaneButton.Label"/>
+                  <Supertip>
+                    <Title resid="TaskpaneButton.Label"/>
+                    <Description resid="TaskpaneButton.Tooltip"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Icon.16x16"/>
+                    <bt:Image size="32" resid="Icon.32x32"/>
+                    <bt:Image size="80" resid="Icon.80x80"/>
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <SourceLocation resid="Taskpane.Url"/>
+                  </Action>
+                </Control>
+              </Group>
+            </OfficeTab>
+          </ExtensionPoint>
+        </DesktopFormFactor>
+      </Host>
+    </Hosts>
 
-    <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides"
-                      xsi:type="VersionOverridesV1_0">
+    <Resources>
+      <bt:Images>
+        <bt:Image id="Icon.16x16" DefaultValue="https://www.tallbricks.com/wp-content/uploads/tb-square-logo-1200x1200-1-scaled.png"/>
+        <bt:Image id="Icon.32x32" DefaultValue="https://www.tallbricks.com/wp-content/uploads/tb-square-logo-1200x1200-1-scaled.png"/>
+        <bt:Image id="Icon.80x80" DefaultValue="https://www.tallbricks.com/wp-content/uploads/tb-square-logo-1200x1200-1-scaled.png"/>
+      </bt:Images>
+      <bt:Urls>
+        <bt:Url id="FunctionFile.Url" DefaultValue="https://tallbricks.github.io/outlook-signature/index.html"/>
+        <bt:Url id="Taskpane.Url" DefaultValue="https://tallbricks.github.io/outlook-signature/index.html"/>
+      </bt:Urls>
+      <bt:ShortStrings>
+        <bt:String id="GroupLabel" DefaultValue="Tall Bricks"/>
+        <bt:String id="TaskpaneButton.Label" DefaultValue="Insert Signature"/>
+      </bt:ShortStrings>
+      <bt:LongStrings>
+        <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Insert Tall Bricks email signature"/>
+      </bt:LongStrings>
+    </Resources>
 
-        <Requirements>
-            <bt:Sets DefaultMinVersion="1.10">
-                <bt:Set Name="Mailbox"/>
-            </bt:Sets>
-        </Requirements>
+    <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides/1.1" xsi:type="VersionOverridesV1_1">
 
-        <Hosts>
-            <Host xsi:type="MailHost">
-                <DesktopFormFactor>
+      <Requirements>
+        <bt:Sets DefaultMinVersion="1.3">
+          <bt:Set Name="Mailbox"/>
+        </bt:Sets>
+      </Requirements>
 
-                    <FunctionFile resid="Commands.Url"/>
+      <Hosts>
+        <Host xsi:type="MailHost">
+          <DesktopFormFactor>
+            <FunctionFile resid="FunctionFile.Url"/>
 
-                    <ExtensionPoint xsi:type="LaunchEvent">
-                        <LaunchEvents>
-                            <LaunchEvent Type="OnNewMessageCompose" FunctionName="insertSignature"/>
-                        </LaunchEvents>
-                        <SourceLocation resid="Commands.Url"/>
-                    </ExtensionPoint>
+            <ExtensionPoint xsi:type="MessageComposeCommandSurface">
+              <OfficeTab id="TabDefault">
+                <Group id="msgComposeGroup2">
+                  <Label resid="GroupLabel"/>
+                  <Control xsi:type="Button" id="msgComposeInsertSignature2">
+                    <Label resid="TaskpaneButton.Label"/>
+                    <Supertip>
+                      <Title resid="TaskpaneButton.Label"/>
+                      <Description resid="TaskpaneButton.Tooltip"/>
+                    </Supertip>
+                    <Icon>
+                      <bt:Image size="16" resid="Icon.16x16"/>
+                      <bt:Image size="32" resid="Icon.32x32"/>
+                      <bt:Image size="80" resid="Icon.80x80"/>
+                    </Icon>
+                    <Action xsi:type="ShowTaskpane">
+                      <SourceLocation resid="Taskpane.Url"/>
+                    </Action>
+                  </Control>
+                </Group>
+              </OfficeTab>
+            </ExtensionPoint>
+          </DesktopFormFactor>
+        </Host>
+      </Hosts>
 
-                </DesktopFormFactor>
-            </Host>
-        </Hosts>
+      <Resources>
+        <bt:Images>
+          <bt:Image id="Icon.16x16" DefaultValue="https://www.tallbricks.com/wp-content/uploads/tb-square-logo-1200x1200-1-scaled.png"/>
+          <bt:Image id="Icon.32x32" DefaultValue="https://www.tallbricks.com/wp-content/uploads/tb-square-logo-1200x1200-1-scaled.png"/>
+          <bt:Image id="Icon.80x80" DefaultValue="https://www.tallbricks.com/wp-content/uploads/tb-square-logo-1200x1200-1-scaled.png"/>
+        </bt:Images>
+        <bt:Urls>
+          <bt:Url id="FunctionFile.Url" DefaultValue="https://tallbricks.github.io/outlook-signature/index.html"/>
+          <bt:Url id="Taskpane.Url" DefaultValue="https://tallbricks.github.io/outlook-signature/index.html"/>
+        </bt:Urls>
+        <bt:ShortStrings>
+          <bt:String id="GroupLabel" DefaultValue="Tall Bricks"/>
+          <bt:String id="TaskpaneButton.Label" DefaultValue="Insert Signature"/>
+        </bt:ShortStrings>
+        <bt:LongStrings>
+          <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Insert Tall Bricks email signature"/>
+        </bt:LongStrings>
+      </Resources>
 
-        <Resources>
-            <bt:Urls>
-                <bt:Url id="Commands.Url" DefaultValue="https://tallbricks.github.io/outlook-signature/index.html"/>
-            </bt:Urls>
-            <bt:ShortStrings>
-                <bt:String id="GroupLabel" DefaultValue="Tall Bricks Signature"/>
-            </bt:ShortStrings>
-            <bt:LongStrings>
-                <bt:String id="GroupLabel.Tooltip" DefaultValue="Tall Bricks Email Signature Add-in"/>
-            </bt:LongStrings>
-        </Resources>
-
-        <WebApplicationInfo>
-            <Id>2076e03d-3e43-4e49-a810-374a4f8d37ec</Id>
-            <Resource>api://tallbricks.com/2076e03d-3e43-4e49-a810-374a4f8d37ec</Resource>
-            <Scopes>
-                <Scope>User.Read</Scope>
-                <Scope>openid</Scope>
-                <Scope>profile</Scope>
-            </Scopes>
-        </WebApplicationInfo>
+      <WebApplicationInfo>
+        <Id>2076e03d-3e43-4e49-a810-374a4f8d37ec</Id>
+        <Resource>api://tallbricks.com/2076e03d-3e43-4e49-a810-374a4f8d37ec</Resource>
+        <Scopes>
+          <Scope>User.Read</Scope>
+          <Scope>openid</Scope>
+          <Scope>profile</Scope>
+        </Scopes>
+      </WebApplicationInfo>
 
     </VersionOverrides>
+
+  </VersionOverrides>
 </OfficeApp>
