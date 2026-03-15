@@ -92,7 +92,7 @@
 
         <WebApplicationInfo>
             <Id>2076e03d-3e43-4e49-a810-374a4f8d37ec</Id>
-            <Resource>api://tallbricks.github.io/outlook-signature/2076e03d-3e43-4e49-a810-374a4f8d37ec</Resource>
+            <Resource>api://tallbricks.com/2076e03d-3e43-4e49-a810-374a4f8d37ec</Resource>
             <Scopes>
                 <Scope>User.Read</Scope>
                 <Scope>openid</Scope>
