@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OfficeApp
+    xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
+    xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides/1.0"
+    xsi:type="MailApp">
+
+    <!-- IMPORTANT: Replace the ID below with a freshly generated GUID -->
+    <!-- Generate one free at: https://guidgenerator.com -->
+    <Id>YOUR-GUID-HERE</Id>
+
+    <Version>1.0.0.0</Version>
+    <ProviderName>Tall Bricks Real Estate LLC</ProviderName>
+    <DefaultLocale>en-US</DefaultLocale>
+    <DisplayName DefaultValue="Tall Bricks Email Signature"/>
+    <Description DefaultValue="Automatically inserts the Tall Bricks email signature in Outlook compose window"/>
+
+    <IconUrl DefaultValue="https://YOUR-AZURE-URL/icon-32.png"/>
+    <HighResolutionIconUrl DefaultValue="https://YOUR-AZURE-URL/icon-64.png"/>
+    <SupportUrl DefaultValue="https://www.tallbricks.com"/>
+
+    <AppDomains>
+        <AppDomain>https://graph.microsoft.com</AppDomain>
+        <AppDomain>https://login.microsoftonline.com</AppDomain>
+    </AppDomains>
+
+    <Hosts>
+        <Host Name="Mailbox"/>
+    </Hosts>
+
+    <Requirements>
+        <Sets>
+            <Set Name="Mailbox" MinVersion="1.10"/>
+        </Sets>
+    </Requirements>
+
+    <!-- Fallback for older Outlook versions -->
+    <FormSettings>
+        <Form xsi:type="ItemEdit">
+            <DesktopSettings>
+                <!-- IMPORTANT: Replace YOUR-AZURE-URL with your Azure Static Web App URL -->
+                <SourceLocation DefaultValue="https://YOUR-AZURE-URL/index.html"/>
+                <RequestedHeight>50</RequestedHeight>
+            </DesktopSettings>
+        </Form>
+    </FormSettings>
+
+    <Permissions>ReadWriteItem</Permissions>
+    <Rule xsi:type="RuleCollection" Mode="Or">
+        <Rule xsi:type="ItemIs" ItemType="Message" FormType="Edit"/>
+    </Rule>
+    <DisableEntityHighlighting>false</DisableEntityHighlighting>
+
+    <!-- Modern overrides for Outlook 2016+ and Microsoft 365 -->
+    <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides"
+                      xsi:type="VersionOverridesV1_0">
+
+        <Requirements>
+            <bt:Sets DefaultMinVersion="1.10">
+                <bt:Set Name="Mailbox"/>
+            </bt:Sets>
+        </Requirements>
+
+        <Hosts>
+            <Host xsi:type="MailHost">
+                <DesktopFormFactor>
+
+                    <FunctionFile resid="Commands.Url"/>
+
+                    <!-- Auto-run on compose new message -->
+                    <ExtensionPoint xsi:type="LaunchEvent">
+                        <LaunchEvents>
+                            <LaunchEvent Type="OnNewMessageCompose" FunctionName="onNewMessageComposeHandler"/>
+                            <LaunchEvent Type="OnNewAppointmentOrganizer" FunctionName="onNewMessageComposeHandler"/>
+                        </LaunchEvents>
+                        <SourceLocation resid="Commands.Url"/>
+                    </ExtensionPoint>
+
+                </DesktopFormFactor>
+            </Host>
+        </Hosts>
+
+        <Resources>
+            <bt:Urls>
+                <!-- IMPORTANT: Replace YOUR-AZURE-URL with your Azure Static Web App URL -->
+                <bt:Url id="Commands.Url" DefaultValue="https://YOUR-AZURE-URL/index.html"/>
+            </bt:Urls>
+            <bt:ShortStrings>
+                <bt:String id="GroupLabel" DefaultValue="Tall Bricks Signature"/>
+            </bt:ShortStrings>
+            <bt:LongStrings>
+                <bt:String id="GroupLabel.Tooltip" DefaultValue="Tall Bricks Email Signature Add-in"/>
+            </bt:LongStrings>
+        </Resources>
+
+        <WebApplicationInfo>
+            <!-- IMPORTANT: Replace YOUR-ENTRA-APP-CLIENT-ID with the app registration client ID from Entra -->
+            <Id>YOUR-ENTRA-APP-CLIENT-ID</Id>
+            <Resource>api://YOUR-AZURE-URL/YOUR-ENTRA-APP-CLIENT-ID</Resource>
+            <Scopes>
+                <Scope>User.Read</Scope>
+                <Scope>openid</Scope>
+                <Scope>profile</Scope>
+            </Scopes>
+        </WebApplicationInfo>
+
+    </VersionOverrides>
+</OfficeApp>
