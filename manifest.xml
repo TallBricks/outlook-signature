@@ -6,9 +6,7 @@
     xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides/1.0"
     xsi:type="MailApp">
 
-    <!-- IMPORTANT: Replace the ID below with a freshly generated GUID -->
-    <!-- Generate one free at: https://guidgenerator.com -->
-    <Id>YOUR-GUID-HERE</Id>
+    <Id>61393f9c-6746-4eb1-b060-808ebc6b442f</Id>
 
     <Version>1.0.0.0</Version>
     <ProviderName>Tall Bricks Real Estate LLC</ProviderName>
@@ -16,8 +14,8 @@
     <DisplayName DefaultValue="Tall Bricks Email Signature"/>
     <Description DefaultValue="Automatically inserts the Tall Bricks email signature in Outlook compose window"/>
 
-    <IconUrl DefaultValue="https://YOUR-AZURE-URL/icon-32.png"/>
-    <HighResolutionIconUrl DefaultValue="https://YOUR-AZURE-URL/icon-64.png"/>
+    <IconUrl DefaultValue="https://www.tallbricks.com/wp-content/uploads/tb-square-logo-1200x1200-1-scaled.png"/>
+    <HighResolutionIconUrl DefaultValue="https://www.tallbricks.com/wp-content/uploads/tb-square-logo-1200x1200-1-scaled.png"/>
     <SupportUrl DefaultValue="https://www.tallbricks.com"/>
 
     <AppDomains>
@@ -39,8 +37,7 @@
     <FormSettings>
         <Form xsi:type="ItemEdit">
             <DesktopSettings>
-                <!-- IMPORTANT: Replace YOUR-AZURE-URL with your Azure Static Web App URL -->
-                <SourceLocation DefaultValue="https://YOUR-AZURE-URL/index.html"/>
+                <SourceLocation DefaultValue="https://tallbricks.github.io/outlook-signature/index.html"/>
                 <RequestedHeight>50</RequestedHeight>
             </DesktopSettings>
         </Form>
@@ -83,8 +80,7 @@
 
         <Resources>
             <bt:Urls>
-                <!-- IMPORTANT: Replace YOUR-AZURE-URL with your Azure Static Web App URL -->
-                <bt:Url id="Commands.Url" DefaultValue="https://YOUR-AZURE-URL/index.html"/>
+                <bt:Url id="Commands.Url" DefaultValue="https://tallbricks.github.io/outlook-signature/index.html"/>
             </bt:Urls>
             <bt:ShortStrings>
                 <bt:String id="GroupLabel" DefaultValue="Tall Bricks Signature"/>
@@ -95,9 +91,8 @@
         </Resources>
 
         <WebApplicationInfo>
-            <!-- IMPORTANT: Replace YOUR-ENTRA-APP-CLIENT-ID with the app registration client ID from Entra -->
-            <Id>YOUR-ENTRA-APP-CLIENT-ID</Id>
-            <Resource>api://YOUR-AZURE-URL/YOUR-ENTRA-APP-CLIENT-ID</Resource>
+            <Id>2076e03d-3e43-4e49-a810-374a4f8d37ec</Id>
+            <Resource>api://tallbricks.github.io/outlook-signature/2076e03d-3e43-4e49-a810-374a4f8d37ec</Resource>
             <Scopes>
                 <Scope>User.Read</Scope>
                 <Scope>openid</Scope>
